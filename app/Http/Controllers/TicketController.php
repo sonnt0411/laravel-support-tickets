@@ -77,7 +77,7 @@ class TicketController extends Controller
 
         if ($request->has('category')) {
             $query->whereHas('categories', function ($q) use ($request) {
-                $q->where('id', $request->input('category'));
+                $q->where('categories.id', $request->input('category'));
             });
         }
 
