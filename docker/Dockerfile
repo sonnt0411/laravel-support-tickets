@@ -1,10 +1,10 @@
 # Dockerfile
-FROM php:8.1-fpm
+FROM php:8.1-fpm-alpine
 
 # Cài đặt các extension cần thiết
-RUN apt-get update && apt-get install -y \
-    libfreetype6-dev \
-    libjpeg62-turbo-dev \
+RUN apk update && apk add --no-cache \
+    freetype-dev \
+    libjpeg-turbo-dev \
     libpng-dev \
     libzip-dev \
     zip \
