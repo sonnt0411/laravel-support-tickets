@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\ApiAuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LabelController;
+use App\Http\Controllers\TicketController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,4 +30,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::get('categories', [CategoryController::class, 'index'])->middleware('role:user,agent');
     Route::get('labels', [LabelController::class, 'index'])->middleware('role:user,agent');
+
+    // Route index được truy cập bởi tất cả các role
+    Route::get('/tickets', [TicketController::class, 'index'])->name('tickets.index');
+
+    // Route store chỉ được truy cập bởi role 'user'
+    Route::post('/tickets', [TicketController::class, 'store'])
+        ->middleware('role:user')
+        ->name('tickets.store');
 });
